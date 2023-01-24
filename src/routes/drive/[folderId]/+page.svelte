@@ -5,6 +5,8 @@
     directorySize,
     fileCount,
     settings,
+    initialLoading,
+    loading
   } from "../../../stores";
   import { derived, writable } from "svelte/store";
   import { page } from "$app/stores";
@@ -14,9 +16,6 @@
   import { afterUpdate, onDestroy } from "svelte";
   import { createFileList } from "../../../helpers/files/stores";
   import { goto } from "$app/navigation";
-
-  const initialLoading = writable(true);
-  const loading = writable(true);
 
   const nextPageToken = writable(null);
   const parentFolder = writable({
