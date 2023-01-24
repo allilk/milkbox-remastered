@@ -29,10 +29,12 @@
   const navigateToFolder = () => {
     isSideNavOpen = false;
 
-    initialLoading.set(true);
-    loading.set(true);
-    directorySize.set(0)
-    fileCount.set(0)
+    if (!$page.path.id.startsWith("/drive/root")) {
+      initialLoading.set(true);
+      loading.set(true);
+      directorySize.set(0);
+      fileCount.set(0);
+    }
   };
 </script>
 
