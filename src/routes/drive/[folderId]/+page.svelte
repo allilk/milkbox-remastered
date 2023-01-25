@@ -6,12 +6,12 @@
     fileCount,
     settings,
     initialLoading,
-    loading
+    loading,
   } from "../../../stores";
   import { derived, writable } from "svelte/store";
   import { page } from "$app/stores";
   import FileObject from "../../../components/files/FileObject.svelte";
-  import { Grid, ProgressBar } from "carbon-components-svelte";
+  import { Column, Grid, ProgressBar, Row } from "carbon-components-svelte";
   import { getParentFolder } from "../../../helpers/files/getParentFolder";
   import { afterUpdate, onDestroy } from "svelte";
   import { createFileList } from "../../../helpers/files/stores";
@@ -33,6 +33,8 @@
         if (timeOutId) clearTimeout(timeOutId);
 
         timeOutId = setTimeout(async () => {
+          lazyLoadedFileList.set([]);
+
           const folderId = $page.params.folderId;
 
           const res = await getFiles(folderId, undefined, $settings.pageSize);
@@ -92,19 +94,24 @@
   });
   onDestroy(unsubscribeNextToken);
 
-  const navigateToFolder = (folder) => goto(folder)
+  const navigateToFolder = (folder) => goto(folder);
 
-  page.subscribe((pg) => {
+  page.subscribe(() => {
     loading.set(true);
     initialLoading.set(true);
     fileCount.set(0);
     directorySize.set(0);
     lazyLoadedFileList.set([]);
-  })
+    parentFolder.set({ ...$parentFolder, name: "" });
+    nextPageToken.set();
+  });
 </script>
 
 {#if $loadedFileList}
   <Grid>
+    <Row padding="0 0 2rem 0">
+      <Column>Index Of /{$parentFolder?.name}/</Column>
+    </Row>
     {#if !$initialLoading}
       <svelte:component
         this={FileObject}

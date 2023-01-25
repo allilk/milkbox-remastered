@@ -9,7 +9,6 @@
   } from "carbon-components-svelte";
   import { settings } from "../../stores";
 
-  $: console.log($settings);
 </script>
 
 <Grid>
