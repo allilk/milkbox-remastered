@@ -25,7 +25,7 @@ const defaultSettings = {
 const settings = writable();
 
 if (typeof localStorage !== "undefined") {
-  settings.set(JSON.parse(localStorage?.settings) || defaultSettings);
+  settings.set(localStorage?.settings ? JSON.parse(localStorage?.settings) : defaultSettings);
 
   settings.subscribe(
     (stngs) => (localStorage.settings = JSON.stringify(stngs))
