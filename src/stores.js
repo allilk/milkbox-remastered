@@ -17,10 +17,20 @@ const fileCount = writable(0);
 const initialLoading = writable(true);
 const loading = writable(true);
 
-const settings = writable({
+const defaultSettings = {
   pageSize: "100",
   cache: false,
-});
+};
+
+const settings = writable();
+
+if (typeof localStorage !== "undefined") {
+  settings.set(JSON.parse(localStorage?.settings) || defaultSettings);
+
+  settings.subscribe(
+    (stngs) => (localStorage.settings = JSON.stringify(stngs))
+  );
+}
 
 export {
   DISCOVERY_DOCS,

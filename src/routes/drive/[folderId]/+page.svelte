@@ -87,25 +87,23 @@
     }
   });
 
-  $: console.log($fileList);
-
   afterUpdate(() => {
     nextPageToken && nextPageToken.set(null);
   });
   onDestroy(unsubscribeNextToken);
 
-  const navigateToFolder = (folder) => {
+  const navigateToFolder = (folder) => goto(folder)
+
+  page.subscribe((pg) => {
     loading.set(true);
     initialLoading.set(true);
     fileCount.set(0);
     directorySize.set(0);
     lazyLoadedFileList.set([]);
-
-    goto(folder);
-  };
+  })
 </script>
 
-{#if $fileList}
+{#if $loadedFileList}
   <Grid>
     {#if !$initialLoading}
       <svelte:component

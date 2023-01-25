@@ -15,9 +15,7 @@
   import {
     directorySize,
     fileCount,
-    initialLoading,
     isAuthenticated,
-    loading,
   } from "../stores";
   import { formatBytes } from "../helpers/formatting/formatBytes";
   import SettingsAdjust from "carbon-icons-svelte/lib/SettingsAdjust.svelte";
@@ -28,14 +26,8 @@
 
   const navigateToFolder = () => {
     isSideNavOpen = false;
-
-    if (!$page.path.id.startsWith("/drive/root")) {
-      initialLoading.set(true);
-      loading.set(true);
-      directorySize.set(0);
-      fileCount.set(0);
-    }
   };
+
 </script>
 
 <header>
@@ -51,10 +43,16 @@
     </svelte:fragment>
     <HeaderNav>
       {#if $page.route.id.startsWith("/drive/")}
+        {#if !$page.route.id.includes("shared-drives")}
+          <HeaderNavItem
+            text={`Directory Size: ${formatBytes($directorySize)}`}
+          />
+        {/if}
         <HeaderNavItem
-          text={`Directory Size: ${formatBytes($directorySize)}`}
+          text={`Total ${
+            $page.route.id.includes("shared-drives") ? "Drives" : "Files"
+          }: ${$fileCount}`}
         />
-        <HeaderNavItem text={`Total Files: ${$fileCount}`} />
       {/if}
     </HeaderNav>
     <SideNav bind:isOpen={isSideNavOpen}>
