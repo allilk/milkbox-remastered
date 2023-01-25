@@ -12,11 +12,7 @@
     SideNavLink,
     SideNavDivider,
   } from "carbon-components-svelte";
-  import {
-    directorySize,
-    fileCount,
-    isAuthenticated,
-  } from "../stores";
+  import { directorySize, fileCount, isAuthenticated } from "../stores";
   import { formatBytes } from "../helpers/formatting/formatBytes";
   import SettingsAdjust from "carbon-icons-svelte/lib/SettingsAdjust.svelte";
   import { goto } from "$app/navigation";
@@ -27,7 +23,6 @@
   const navigateToFolder = () => {
     isSideNavOpen = false;
   };
-
 </script>
 
 <header>
