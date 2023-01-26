@@ -48,8 +48,19 @@ body {
   text-align: right;
 }
 
-.bx--loading {
-  margin-top: 2rem;
-  left: 50% !important;
-  position: absolute;
+.compact-density {
+  min-height: 0 !important;
+  padding: 0.5rem 1rem !important;
+}
+
+.normal-density {
+  min-height: 0 !important;
+}
+
+.parent-folder-header .view {
+  text-align: right;
+}
+
+.parent-folder-header .view-icon:hover {
+  cursor: pointer;
 }

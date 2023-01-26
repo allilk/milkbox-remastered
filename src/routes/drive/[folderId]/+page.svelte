@@ -16,6 +16,8 @@
   import { afterUpdate, onDestroy } from "svelte";
   import { createFileList } from "../../../helpers/files/stores";
   import { goto } from "$app/navigation";
+  import RowView from "carbon-icons-svelte/lib/Row.svelte";
+  import GridView from "carbon-icons-svelte/lib/Grid.svelte";
 
   const nextPageToken = writable(null);
   const parentFolder = writable({
@@ -109,8 +111,24 @@
 
 {#if $loadedFileList}
   <Grid>
-    <Row padding="0 0 2rem 0">
+    <Row padding="0 0 2rem 0" class="parent-folder-header">
       <Column>Index Of /{$parentFolder?.name}/</Column>
+      <Column class="view">
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <div
+          on:click={() =>
+            settings.set({
+              ...settings,
+              layout: $settings?.layout === "row" ? "grid" : "row",
+            })}
+        >
+          <svelte:component
+            this={$settings?.layout === "row" ? RowView : GridView}
+            class="view-icon"
+            on:click
+          />
+        </div>
+      </Column>
     </Row>
     {#if !$initialLoading}
       <svelte:component

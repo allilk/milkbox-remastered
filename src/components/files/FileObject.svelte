@@ -1,5 +1,6 @@
 <script>
   import { ClickableTile, Row, Column } from "carbon-components-svelte";
+  import { settings } from "../../stores";
   import { readable } from "svelte/store";
   import { formatBytes } from "../../helpers/formatting/formatBytes";
 
@@ -12,6 +13,7 @@
 
 <ClickableTile
   on:click={$isFolder ? () => navigateToFolder(`/drive/${id}`) : () => {}}
+  class={$settings.density === "Compact" ? "compact-density" : "normal-density"}
 >
   <Row class={$isFolder ? "folder" : "file"}>
     <Column class="name" sm={3}

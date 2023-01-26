@@ -20,6 +20,8 @@ const loading = writable(true);
 const defaultSettings = {
   pageSize: "100",
   cache: false,
+  density: "Normal",
+  layout: "row"
 };
 
 const settings = writable();

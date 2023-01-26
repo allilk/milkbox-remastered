@@ -8,13 +8,12 @@
     Checkbox,
   } from "carbon-components-svelte";
   import { settings } from "../../stores";
-
 </script>
 
 <Grid>
   <Row>
     <Column>
-      <h5>Loading Settings</h5>
+      <h5>Loading</h5>
     </Column>
   </Row>
   <br />
@@ -37,6 +36,26 @@
         <SelectItem value="250" />
         <SelectItem value="500" />
         <SelectItem value="1000" />
+      </Select>
+    </Column>
+  </Row>
+  <br/>
+  <Row>
+    <Column>
+      <h5>Display</h5>
+    </Column>
+  </Row>
+  <br />
+  <Row>
+    <Column md={2}>
+      <Select
+        labelText="Row Density"
+        selected={$settings?.density}
+        on:change={({ target: { value } }) =>
+          settings.set({ ...$settings, density: value })}
+      >
+        <SelectItem value="Normal" />
+        <SelectItem value="Compact" />
       </Select>
     </Column>
   </Row>
