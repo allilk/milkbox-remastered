@@ -39,7 +39,7 @@
       </Select>
     </Column>
   </Row>
-  <br/>
+  <br />
   <Row>
     <Column>
       <h5>Display</h5>
@@ -58,5 +58,25 @@
         <SelectItem value="Compact" />
       </Select>
     </Column>
+  </Row>
+  <br />
+  <Row>
+    <Column>
+      <h5>File Management</h5>
+    </Column>
+  </Row>
+  <br />
+  <Row>
+    <Column md={2}
+      ><Checkbox
+        labelText="Direct Download (Slow)"
+        checked={$settings?.customDownload}
+        on:change={() =>
+          settings.set({
+            ...$settings,
+            customDownload: !$settings?.customDownload,
+          })}
+      /></Column
+    >
   </Row>
 </Grid>

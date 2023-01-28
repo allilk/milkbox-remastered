@@ -21,7 +21,8 @@ const defaultSettings = {
   pageSize: "100",
   cache: false,
   density: "Normal",
-  layout: "row"
+  layout: "row",
+  customDownload: false,
 };
 
 const settings = writable();
